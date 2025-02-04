@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        pink: {
+          1: "#ff347f",
+          2: "#c9356c"
+        }
       },
     },
   },
