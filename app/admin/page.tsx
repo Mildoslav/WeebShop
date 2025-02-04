@@ -25,9 +25,13 @@ export default async function AdminPage() {
 
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+            <h1 className="text-2xl font-bold mb-4">Admin</h1>
             <div className="grid gap-4">
-                {/* Add your admin dashboard components here */}
+                <ul>
+                    <li>Pridat produkt</li>
+                    <li>Upravit produkt</li>
+                    <li>nevim pico</li>
+                </ul>
             </div>
         </div>
     )
