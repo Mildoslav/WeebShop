@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
-export default {
+export default withUt({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,10 +14,11 @@ export default {
         foreground: "var(--foreground)",
         pink: {
           1: "#ff347f",
-          2: "#c9356c"
-        }
+          2: "#c9356c",
+        },
       },
     },
   },
   plugins: [],
-} satisfies Config;
+}) satisfies Config;
+

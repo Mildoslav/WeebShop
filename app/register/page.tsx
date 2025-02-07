@@ -27,7 +27,7 @@ export default function Register() {
     };
 
     return(
-        <section className="w-full h-screen flex items-center justify-center text-black">
+        <section className="w-full my-auto  flex items-center justify-center text-black ">
             <form ref = {ref}
                   action={handleSubmit}
                   className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2

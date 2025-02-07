@@ -1,13 +1,14 @@
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth/next'
+import {redirect} from 'next/navigation'
+import {getServerSession} from 'next-auth/next'
 // @ts-ignore
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import { connectDB } from '../lib/mongodb'
-import User from '../lib/models/User'
+import {authOptions} from '@/app/api/auth/[...nextauth]/route'
+import {connectDB} from '../../lib/mongodb'
+import User from '@/lib/models/User'
+import Link from "next/link";
 
 async function getUser(email: string) {
     await connectDB()
-    return User.findOne({ email })
+    return User.findOne({email})
 }
 
 export default async function AdminPage() {
@@ -28,7 +29,9 @@ export default async function AdminPage() {
             <h1 className="text-2xl font-bold mb-4">Admin</h1>
             <div className="grid gap-4">
                 <ul>
-                    <li>Pridat produkt</li>
+                    <Link href="/admin/add-product">
+                        <li>Pridat produkt</li>
+                    </Link>
                     <li>Upravit produkt</li>
                     <li>nevim pico</li>
                 </ul>
