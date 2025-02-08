@@ -108,10 +108,8 @@ function Page() {
                                     checked={stateSizes.includes(size)}
                                     onChange={() => {
                                         if (stateSizes.includes(size)) {
-                                            // Remove the size
                                             setStateSizes(oldSizes => oldSizes.filter(s => s !== size));
                                         } else {
-                                            // Add the size
                                             setStateSizes(oldSizes => [...oldSizes, size]);
                                         }
                                     }}
@@ -127,8 +125,12 @@ function Page() {
                         <UploadButton
                             endpoint="imageUploader"
                             onClientUploadComplete={(res) => {
-                                setImage(res[0].url.trim());
-                                console.log("img: ", res[0].url)
+                                if (res && res[0] && res[0].url) { // Check if res and its properties exist
+                                    setImage(res[0].url.trim());
+                                    console.log("img: ", res[0].url);
+                                } else {
+                                    console.error("Upload complete but URL is missing:", res);
+                                }
                             }}
                             onUploadError={(error: Error) => {
                                 console.log(`Upload error: ${error.message}`);
@@ -137,8 +139,8 @@ function Page() {
                     ) : (
                         <div className="relative">
                             <Image
-                                src={image}
-                                alt={"Product image of: "}
+                                src={image} // Dynamic image URL
+                                alt={"Product image of: " + name} // alt attribute
                                 width={128}
                                 height={128}
                                 className="rounded-md"
