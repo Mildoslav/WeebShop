@@ -1,9 +1,9 @@
 "use client";
-import { signOut, useSession } from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
-export default function UserLogin() {
+export default function UserAuth() {
     const { status } = useSession();
     const router = useRouter();
 
@@ -22,11 +22,7 @@ export default function UserLogin() {
                     Sign Out
                 </button>
             )
-        } else if (status === "loading") {
-            return (
-                <span className="text-[#888] text-sm mt-7">Loading...</span>
-            )
-        } else {
+        }  else {
             return (
                 <Link
                     href="/login"

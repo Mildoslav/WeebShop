@@ -1,7 +1,9 @@
 import {connectDB} from '@/lib/mongodb';
 import Product from '@/lib/models/Product';
+import {NextRequest, NextResponse} from "next/server";
 
-export async function POST(req: Request) : Promise<Response> {
+
+export async function POST(req: Request): Promise<Response> {
     try {
         await connectDB();
         const data = await req.json();
@@ -17,6 +19,16 @@ export async function POST(req: Request) : Promise<Response> {
     }
 }
 
-export async function GET(req: any, res: any) {
-    console.log(res);
+export async function GET(req: NextRequest, res: NextResponse): Promise<NextResponse> {
+    try {
+        await connectDB();
+        const products = await Product.find();
+        return NextResponse.json({ products }, { status: 200 }); // Use object notation for clarity
+    } catch (error) {
+        console.error("Error fetching products:", error); // Log the error for debugging
+        return new NextResponse(JSON.stringify({ message: `Error fetching products: ${error}` }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
 }

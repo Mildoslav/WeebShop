@@ -8,7 +8,7 @@ function Page() {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [stateSizes, setStateSizes] = useState<string[]>([]);
-    const [img, setImg] = useState('');
+    const [image, setImage] = useState('');
 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,7 +19,7 @@ function Page() {
             price: parseFloat(price),
             description,
             sizes: stateSizes,
-            img
+            image
         };
 
         try {
@@ -36,8 +36,7 @@ function Page() {
                 setPrice('');
                 setDescription('');
                 setStateSizes([]);
-                setImg('');
-                alert('Product added successfully!');
+                setImage('');
             } else {
                 throw new Error('Failed to add product');
             }
@@ -108,14 +107,12 @@ function Page() {
                                     value={size}
                                     checked={stateSizes.includes(size)}
                                     onChange={() => {
-                                        if(stateSizes.includes(size)) {
-                                            let oldSizes = [...stateSizes]
-                                            oldSizes = oldSizes.splice(oldSizes.indexOf(size), 1);
-                                            setStateSizes(oldSizes);
+                                        if (stateSizes.includes(size)) {
+                                            // Remove the size
+                                            setStateSizes(oldSizes => oldSizes.filter(s => s !== size));
                                         } else {
-                                            const oldSizes = [...stateSizes]
-                                           oldSizes.push(size);
-                                            setStateSizes(oldSizes);
+                                            // Add the size
+                                            setStateSizes(oldSizes => [...oldSizes, size]);
                                         }
                                     }}
                                 />
@@ -126,11 +123,12 @@ function Page() {
                 </div>
 
                 <div className="mb-4">
-                    {img === '' ? (
+                    {image === '' ? (
                         <UploadButton
                             endpoint="imageUploader"
                             onClientUploadComplete={(res) => {
-                                setImg(res[0].url);
+                                setImage(res[0].url.trim());
+                                console.log("img: ", res[0].url)
                             }}
                             onUploadError={(error: Error) => {
                                 console.log(`Upload error: ${error.message}`);
@@ -139,19 +137,12 @@ function Page() {
                     ) : (
                         <div className="relative">
                             <Image
-                                src={img}
-                                alt={name}
-                                width={64}
-                                height={64}
+                                src={image}
+                                alt={"Product image of: "}
+                                width={128}
+                                height={128}
                                 className="rounded-md"
                             />
-                            <button
-                                type="button"
-                                onClick={() => setImg('')}
-                                className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full"
-                            >
-                                ×
-                            </button>
                         </div>
                     )}
                 </div>

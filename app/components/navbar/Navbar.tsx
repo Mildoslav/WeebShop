@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../../../public/logo.jpg'
 import Image from "next/image";
 import Dropdown from "@/app/components/navbar/Dropdown";
-import UserLogin from "@/app/components/navbar/UserLogin";
+import UserAuth from "@/app/components/navbar/UserAuth";
 import Link from "next/link";
 import CartDropdown from "@/app/components/navbar/CartDropdown";
 
@@ -38,7 +38,7 @@ function Navbar() {
                 </div>
 
                 <div className="flex items-center">
-                    <UserLogin />
+                    <UserAuth />
                 </div>
 
                 <div className="flex items-center">

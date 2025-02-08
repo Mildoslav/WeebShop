@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
     images: {
@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'utfs.io',
                 port: '',
-                pathname: '',
+                pathname: '/f/*',
                 search: '',
             },
         ],
