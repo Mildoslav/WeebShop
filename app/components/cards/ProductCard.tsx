@@ -7,9 +7,9 @@ interface Props {
     product: Product; // Changed to accept a single product
 }
 
-const ProductCard: React.FC<Props> = ({ product }) => { // Removed products prop
-    if (!product) { // Handle the case where no product is provided
-        return <div>Loading...</div>; // Or any other appropriate placeholder
+const ProductCard: React.FC<Props> = ({ product }) => {
+    if (!product) {
+        return <div>Loading...</div>;
     }
 
     return (
