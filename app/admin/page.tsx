@@ -25,14 +25,16 @@ export default async function AdminPage() {
     }
 
     return (
-        <div className="p-8">
+        <div className="p-8 flex flex-col">
             <h1 className="text-2xl font-bold mb-4">Admin</h1>
             <div className="grid gap-4">
                 <ul>
                     <Link href="/admin/add-product">
                         <li>Pridat produkt</li>
                     </Link>
-                    <li>Upravit produkt</li>
+                    <Link href="/admin/edit-post">
+                        <li>Upravit produkt</li>
+                    </Link>
                     <li>nevim pico</li>
                 </ul>
             </div>
