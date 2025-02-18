@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions  = {
                 email
             }).exec()
             if(data.admin){
+                // @ts-ignore
                 session.admin = true;
             }
             console.log(data);
