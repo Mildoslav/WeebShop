@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from "next/image";
 import AddButton from "@/app/components/AddButton";
-import {Product} from "../../../utils/types";
+import {Product} from "@/utils/types";
+import EditButton from "@/app/admin/components/EditButton";
 
 interface Props {
     product: Product; // Changed to accept a single product
@@ -24,6 +25,11 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 </div>
                 <div className="flex justify-center border mb-2">
                     <AddButton/>
+                </div>
+                <div className="flex justify-center border mb-2">
+                    <EditButton onClick={() => {
+                        console.log("kokot");
+                    }}/>
                 </div>
             </div>
         </div>

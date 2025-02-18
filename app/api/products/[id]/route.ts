@@ -63,3 +63,46 @@ export async function PUT(
         ); // Include error message in response
     }
 }
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        await connectDB();
+
+        const { id } = params;
+
+        if (!mongoose.isValidObjectId(id)) {
+            return NextResponse.json({ message: "Invalid Product ID" }, { status: 400 });
+        }
+
+        const deletedProduct = await Product.deleteOne({ _id: id });
+
+        if (deletedProduct.deletedCount === 0) {
+            return NextResponse.json({ message: "Product not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Product deleted successfully" }, { status: 200 });
+
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        return NextResponse.json({ message: "Error deleting product", error }, { status: 500 });
+    }
+}
+
+export async function GET(req: Request, { params }: { params: { id: string } }): Promise<Response> {
+    try {
+        await connectDB();
+
+        const { id } = params;
+
+
+        const product = await Product.findById({ _id: id });
+
+        return NextResponse.json(product, { status: 200 });
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return Response.json(
+            { message: 'Error fetching products: ' + error },
+            { status: 500 }
+        );
+    }
+}

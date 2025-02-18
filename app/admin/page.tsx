@@ -1,6 +1,5 @@
 import {redirect} from 'next/navigation'
 import {getServerSession} from 'next-auth/next'
-// @ts-ignore
 import {authOptions} from '@/app/api/auth/[...nextauth]/route'
 import {connectDB} from '../../lib/mongodb'
 import User from '@/lib/models/User'
@@ -13,6 +12,7 @@ async function getUser(email: string) {
 
 export default async function AdminPage() {
     const session = await getServerSession(authOptions)
+    console.log(session)
 
     if (!session) {
         redirect('/login')

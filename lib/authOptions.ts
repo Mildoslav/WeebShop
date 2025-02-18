@@ -1,6 +1,6 @@
-import { connectDB } from "./mongodb";
+import {connectDB} from "./mongodb";
 import User from "@/lib/models/User";
-import type { NextAuthOptions } from "next-auth";
+import type {NextAuthOptions} from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
@@ -33,5 +33,20 @@ export const authOptions: NextAuthOptions  = {
     ],
     session: {
         strategy: "jwt",
+    }, callbacks: {
+        async session({session}) {
+            await connectDB();
+
+            const email = session?.user?.email;
+            const data = await User.findOne({
+                email
+            }).exec()
+            if(data.admin){
+                session.admin = true;
+            }
+            console.log(data);
+
+            return session;
+        }
     }
 };
