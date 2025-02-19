@@ -2,12 +2,13 @@
 
 import React from "react";
 import {useSession} from "next-auth/react";
+import Link from "next/link";
 
 interface EditButtonProps {
     onClick: () => void;
 }
 
-const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
+const EditButton: React.FC<EditButtonProps> = () => {
     const { data: session, status } = useSession()
 
 
@@ -17,14 +18,16 @@ const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
         return null;
     }
 
+    // @ts-ignore
     if (!session.admin) {
         return null;
     }
 
     return (
-        <button onClick={onClick}>
-            Edit
-        </button>
+        <Link href={"/admin/edit-product"}>
+            <button>Edit</button>
+        // </Link>
+
     );
 };
 
