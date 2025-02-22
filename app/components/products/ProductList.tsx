@@ -1,6 +1,5 @@
-"use client";
-import {useEffect, useState} from 'react';
-import ProductCard from "@/app/components/products/ProductCard"
+import {Suspense} from 'react';
+import ProductCard from "@/app/components/products/ProductCard";
 
 interface Product {
     _id: string;
@@ -11,46 +10,24 @@ interface Product {
     sizes: string[];
 }
 
-export default function Home() {
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+async function getProducts() {
+    const res = await fetch('http://localhost:3000/api/products', { cache: 'no-store' });
+    if (!res.ok) {
+        throw new Error('Failed to fetch products');
+    }
+    return res.json();
+}
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setIsLoading(true);
-            try {
-                const res = await fetch("/api/products");  // Your API endpoint
-                if (!res.ok) {
-                    throw new Error(`Failed to fetch products: ${res.status}`);
-                }
-                const data = await res.json();
-
-                // Check if data is an array
-                if (Array.isArray(data)) {
-                    setProducts(data);
-                } else {
-                    console.error("Data from API is not an array:", data);
-                    setError("Invalid data format from API");
-                }
-            } catch (e: any) {
-                setError(e.message || "Failed to fetch products");
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchProducts();
-    }, []); // Empty dependency array: runs only once
-
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+export default async function ProductList() {
+    const products = await getProducts();
 
     return (
-        <main className="flex min-h-screen flex-wrap items-center justify-center p-24">
-            {products.map((product) => (
-                <ProductCard key={product._id.toString()} product={{...product, _id: parseInt(product._id)}} />  // Render each product
-            ))}
-        </main>
+        <Suspense fallback={<div>Loading products...</div>}>
+            <main className="flex min-h-screen flex-wrap items-center justify-center p-24">
+                {products.map((product : Product) => (
+                    <ProductCard key={product._id.toString()} product={{...product, _id: (product._id)}}/>  // Render each product
+                ))}
+            </main>
+        </Suspense>
     );
 }

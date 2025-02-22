@@ -12,7 +12,6 @@ async function getUser(email: string) {
 
 export default async function AdminPage() {
     const session = await getServerSession(authOptions)
-    console.log(session)
 
     if (!session) {
         redirect('/login')

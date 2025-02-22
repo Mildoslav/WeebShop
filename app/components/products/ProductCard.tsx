@@ -3,10 +3,10 @@ import Image from "next/image";
 import AddButton from "@/app/components/AddButton";
 import {Product} from "@/utils/types";
 import EditButton from "@/app/admin/components/EditButton";
-import Giigas from "../../../public/giggas.jpg"
+import DeleteButton from "@/app/admin/components/DeleteButton";
 
 interface Props {
-    product: Product; // Changed to accept a single product
+    product: Product;
 }
 
 const ProductCard: React.FC<Props> = ({ product }) => {
@@ -17,7 +17,8 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     return (
         <div className="m-6">
             <div className="border flex flex-col">
-                <Image src={product?.image ?? Giigas} alt={"Product image of: " + product.name} width={256} height={256}/>
+                {product?.image == null ? null
+                    : <Image src={product?.image} alt={"Product image of: " + product.name} width={256} height={256}/>}
                 <div className="flex justify-center border text-2xl m-3">
                     <h1>{product.name}</h1>
                 </div>
@@ -28,9 +29,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     <AddButton/>
                 </div>
                 <div className="flex justify-center border mb-2">
-                    <EditButton onClick={() => {
-                        console.log("kokot");
-                    }}/>
+                    <EditButton id={product._id}/>
+                </div>
+                <div className="flex justify-center border mb-2">
+                    <DeleteButton id={product._id}/>
                 </div>
             </div>
         </div>

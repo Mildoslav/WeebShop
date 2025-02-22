@@ -5,14 +5,14 @@ import {useSession} from "next-auth/react";
 import Link from "next/link";
 
 interface EditButtonProps {
-    onClick: () => void;
+    id : string
 }
 
-const EditButton: React.FC<EditButtonProps> = () => {
+const EditButton: React.FC<EditButtonProps> = (props) => {
     const { data: session, status } = useSession()
 
 
-    console.log(session);
+
 
     if (status === "loading" || session === null) {
         return null;
@@ -24,9 +24,9 @@ const EditButton: React.FC<EditButtonProps> = () => {
     }
 
     return (
-        <Link href={"/admin/edit-product"}>
+        <Link href={`/admin/edit-product/${props.id}`}>
             <button>Edit</button>
-        // </Link>
+         </Link>
 
     );
 };

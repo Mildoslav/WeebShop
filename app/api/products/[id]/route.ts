@@ -68,7 +68,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     try {
         await connectDB();
 
-        const { id } = params;
+        const { id } = await params;
 
         if (!mongoose.isValidObjectId(id)) {
             return NextResponse.json({ message: "Invalid Product ID" }, { status: 400 });
@@ -92,7 +92,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }):
     try {
         await connectDB();
 
-        const { id } = params;
+        const { id } = await params;
 
 
         const product = await Product.findById({ _id: id });
