@@ -1,5 +1,5 @@
 import {Suspense} from 'react';
-import ProductCard from "@/app/components/products/ProductCard";
+import ProductCard from "@/app/components/products/cards/ProductCard";
 
 interface Product {
     _id: string;

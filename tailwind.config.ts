@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
-import { withUt } from "uploadthing/tw";
+import type {Config} from "tailwindcss";
+import {withUt} from "uploadthing/tw";
 
 export default withUt({
   content: [
@@ -10,12 +10,10 @@ export default withUt({
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        pink: {
-          1: "#ff347f",
-          2: "#c9356c",
-        },
+       primary: "#382039",
+        secondary: "#200f21",
+        light: "#5a3d5c",
+        button1: "#f638dc"
       },
     },
   },

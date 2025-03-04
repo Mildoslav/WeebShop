@@ -6,3 +6,9 @@ export interface Product {
     price: number;
     image: string;
 }
+
+export interface Theme {
+    id: number
+    name: string;
+    image: string;
+}

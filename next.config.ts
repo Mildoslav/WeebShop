@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
                 pathname: '/f/*',
                 search: '',
             },
+            {
+                protocol: 'https',
+                hostname: '2ucczhzrfg.ufs.sh',
+                port: '',
+                pathname: '/f/*',
+                search: '',
+            },
 
         ],
     },

@@ -1,14 +1,14 @@
 import React from 'react';
 import Logo from '../../../public/logo.jpg'
 import Image from "next/image";
-import Dropdown from "@/app/components/navbar/Dropdown";
+import Dropdown from "@/app/components/navbar/dropdown/Dropdown";
 import UserAuth from "@/app/components/navbar/UserAuth";
 import Link from "next/link";
-import CartDropdown from "@/app/components/navbar/CartDropdown";
+import CartDropdown from "@/app/components/navbar/dropdown/CartDropdown";
 
 function Navbar() {
     return (
-        <nav className="flex justify-between align-middle p-2 border px-12">
+        <nav className="flex justify-between align-middle p-2 border px-12 bg-secondary">
             {/*left*/}
             <div>
                 <Link href="/">
