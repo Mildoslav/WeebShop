@@ -21,7 +21,7 @@ export default function Home() {
         const fetchProducts = async () => {
             setIsLoading(true);
             try {
-                const res = await fetch("/api/products");  // Your API endpoint
+                const res = await fetch(`${process.env.API_URL}/api/products`);  // Your API endpoint
                 if (!res.ok) {
                     throw new Error(`Failed to fetch products: ${res.status}`);
                 }

@@ -23,7 +23,7 @@ function Page() {
         };
 
         try {
-            const response = await fetch('/api/products', {
+            const response = await fetch(`${process.env.API_URL}/api/products`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
