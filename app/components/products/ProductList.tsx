@@ -11,7 +11,7 @@ interface Product {
 }
 
 async function getProducts() {
-    const res = await fetch(`${process.env.API_URL}/api/products`, { cache: 'no-store' });
+    const res = await fetch(`http://89.24.77.56:4000/api/products`, { cache: 'no-store' });
     if (!res.ok) {
         throw new Error('Failed to fetch products');
     }
@@ -23,7 +23,7 @@ export default async function ProductList() {
 
     return (
         <Suspense fallback={<div>Loading products...</div>}>
-            <main className="flex min-h-screen flex-wrap items-center justify-center p-24">
+            <main className="flex min-h-screen flex-wrap items-center justify-center p-24 border">
                 {products.map((product : Product) => (
                     <ProductCard key={product._id.toString()} product={{...product, _id: (product._id)}}/>  // Render each product
                 ))}

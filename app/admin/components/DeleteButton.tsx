@@ -15,7 +15,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
     const handleDelete = async () => {
         if (confirm('Are you sure you want to delete this product?')) {
             try {
-                const response = await fetch(`${process.env.API_URL}/api/products/${id}`, {
+                const response = await fetch(`http://89.24.77.56:4000/api/products/${id}`, {
                     method: 'DELETE',
                 });
 

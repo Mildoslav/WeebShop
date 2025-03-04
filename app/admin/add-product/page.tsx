@@ -11,6 +11,7 @@ function Page() {
     const [image, setImage] = useState('');
 
 
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -23,7 +24,7 @@ function Page() {
         };
 
         try {
-            const response = await fetch(`${process.env.API_URL}/api/products`, {
+            const response = await fetch(`http://89.24.77.56:4000/api/products`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,10 +39,13 @@ function Page() {
                 setStateSizes([]);
                 setImage('');
             } else {
-                throw new Error('Failed to add product');
+                const errorData = await response.json();
+                const errorMessage = errorData?.message || 'Failed to add product';
+                throw new Error(errorMessage);
             }
-        } catch (error) {
-            console.error('Error adding product:', error);
+        } catch (error: any) {
+            console.error('Error adding product:', error.message);
+            alert(`Error adding product: ${error.message}`);
         }
     };
 
@@ -125,7 +129,7 @@ function Page() {
                         <UploadButton
                             endpoint="imageUploader"
                             onClientUploadComplete={(res) => {
-                                if (res && res[0] && res[0].url) { // Check if res and its properties exist
+                                if (res && res[0] && res[0].url) {
                                     setImage(res[0].url.trim());
                                     console.log("img: ", res[0].url);
                                 } else {
@@ -139,8 +143,8 @@ function Page() {
                     ) : (
                         <div className="relative">
                             <Image
-                                src={image} // Dynamic image URL
-                                alt={"Product image of: " + name} // alt attribute
+                                src={image}
+                                alt={"Product image of: " + name}
                                 width={128}
                                 height={128}
                                 className="rounded-md"

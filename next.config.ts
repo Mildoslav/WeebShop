@@ -1,6 +1,11 @@
 import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
+    // reactStrictMode: true,
+    // swcMinify: true,
+    publicRuntimeConfig: {
+        API_URL: process.env.API_URL || 'http://89.24.77.56:4000'
+    },
     images: {
         remotePatterns: [
             {

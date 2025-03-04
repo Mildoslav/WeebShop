@@ -12,7 +12,7 @@ const EditProduct = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`${process.env.API_URL}/api/products/${id}`);
+                const response = await fetch(`http://89.24.77.56:4000/api/products/${id}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -39,7 +39,7 @@ const EditProduct = () => {
 
     const handleUpdateProduct = async (productData: Product) => { // Type the productData
         try {
-            const response = await fetch(`${process.env.API_URL}/api/products/${id}`, {
+            const response = await fetch(`http://89.24.77.56:4000/api/products/${id}`, {
                 method: 'PUT', // Or PATCH if your API supports partial updates
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,6 +61,7 @@ const EditProduct = () => {
         }
     };
 
+    // @ts-ignore
     return (
         <div>
             <h2>Edit Product</h2>
