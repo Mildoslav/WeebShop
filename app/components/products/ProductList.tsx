@@ -23,9 +23,9 @@ export default async function ProductList() {
 
     return (
         <Suspense fallback={<div>Loading products...</div>}>
-            <main className="flex min-h-screen flex-wrap items-center justify-center p-24 border">
+            <main className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4">
                 {products.map((product : Product) => (
-                    <ProductCard key={product._id.toString()} product={{...product, _id: (product._id)}}/>  // Render each product
+                    <ProductCard key={product._id.toString()} product={{...product, _id: (product._id)}}/>
                 ))}
             </main>
         </Suspense>

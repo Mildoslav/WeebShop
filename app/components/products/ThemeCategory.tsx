@@ -29,16 +29,19 @@ const themes: Theme[] = [
 
 function ThemeCategory() {
     return (
-        <div className="flex justify-center gap-4 px-4 pt-8">
-            {themes.map((theme) => (
-                <ThemeCard
-                    key={theme.id}
-                    theme={theme}
-                    imageUrl={theme.image}
-                    imageAlt={`${theme.name} preview`}
-                    className="transform hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 cursor-pointer"
-                />
-            ))}
+        <div className="overflow-x-auto whitespace-nowrap py-4 scrollbar-hide">
+            <div className="flex gap-4 px-4 justify-center">
+                {themes.map((theme) => (
+                    <div key={theme.id} className="flex-none w-64">
+                        <ThemeCard
+                            theme={theme}
+                            imageUrl={theme.image}
+                            imageAlt={`${theme.name} preview`}
+                            className="transform hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 cursor-pointer"
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

@@ -2,10 +2,16 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
-import {register} from "../actions/register";
+import {register} from "../../actions/register";
 
 
-export default function Register() {
+interface RegisterModalProps {
+    handleShowModal: () => void;
+    isOpen: boolean;
+}
+
+
+export default function Register({ handleShowModal, isOpen }: RegisterModalProps) {
     const [error, setError] = useState<string>();
     const router = useRouter();
     const ref = useRef<HTMLFormElement>(null);
@@ -22,9 +28,14 @@ export default function Register() {
             setError(r.error);
             return;
         } else {
+            handleShowModal();
             return router.push("/login");
         }
     };
+
+    if (!isOpen) {
+        return null;
+    }
 
     return(
         <section className="w-full my-auto  flex items-center justify-center text-black ">
