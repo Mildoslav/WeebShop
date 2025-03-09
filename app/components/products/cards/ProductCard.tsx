@@ -20,7 +20,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     return (
         <div className="m-2 md:m-6 flex justify-center cursor-pointer">
             <div className="hover:border flex flex-col relative transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:-translate-y-2 rounded-lg overflow-hidden w-full md:w-64 h-[300px] md:h-[400px]">
-                <Link href={`/products/${productId}`}>
+                <Link href={`/product/${productId}`}>
                     <div className="w-64 h-64 relative">
                         <div className="absolute top-2 right-2 z-10">
                             <AddButton />
@@ -36,7 +36,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                         ) : null}
                     </div>
                 </Link>
-                <Link href={`/products/${productId}`}>
+                <Link href={`/product/${productId}`}>
                     <div className="flex flex-col gap-2 p-3">
                         <h1 className="truncate text-2xl">{product.name}</h1>
                         <h2 className="text-lg">{product.price} Kč</h2>
