@@ -1,13 +1,15 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from 'next/navigation';
-import {Product} from '@/utils/types'; // Import the Product type
 import Image from "next/image";
+import {Product} from "@/utils/types";
 
-const ProductPage = () => {
+interface Props {
+    product: Product;
+}
+
+const ProductPage: React.FC<Props> = ({ product }) => {
     const { id } = useParams() as { id: string };
-    const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -16,25 +18,16 @@ const ProductPage = () => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const data = await response.json();
-                setProduct(data);
             } catch (error) {
                 console.error('Error fetching product:', error);
-            } finally {
-                setLoading(false);
+                // Handle error, perhaps by setting an error state and displaying a message
             }
         };
 
         fetchProduct();
     }, [id]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
-    if (!product) {
-        return <div>Product not found.</div>;
-    }
 
     return (
         <div className="max-w-4xl mx-auto p-6">
@@ -54,8 +47,8 @@ const ProductPage = () => {
                 <div className="w-full md:w-1/2">
                     <p className="text-xl text-gray-700 mb-4">{product.description}</p>
                     <span className="text-lg font-semibold mb-4 block">
-            Cena: {product.price} Kč
-          </span>
+                        Cena: {product.price} Kč
+                    </span>
                     {product.sizes && product.sizes.length > 0 && (
                         <div>
                             <span className="text-lg font-semibold">Velikosti:</span>
@@ -65,8 +58,8 @@ const ProductPage = () => {
                                         key={index}
                                         className="border border-gray-300 rounded px-2 py-1"
                                     >
-                    {size}
-                  </span>
+                                        {size}
+                                    </span>
                                 ))}
                             </div>
                         </div>
@@ -75,6 +68,6 @@ const ProductPage = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ProductPage;

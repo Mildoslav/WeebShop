@@ -1,7 +1,7 @@
 "use client"
 import {useEffect, useState} from 'react';
 import {useParams} from 'next/navigation';
-import {Product} from '@/utils/types'; // Import the Product type
+import {Product} from '@/utils/types';
 import ProductForm from "@/app/components/products/ProductForm";
 
 const EditProduct = () => {
