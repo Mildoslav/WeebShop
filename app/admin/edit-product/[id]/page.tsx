@@ -37,10 +37,10 @@ const EditProduct = () => {
         return <div>Product not found.</div>;
     }
 
-    const handleUpdateProduct = async (productData: Product) => { // Type the productData
+    const handleUpdateProduct = async (productData: Product) => {
         try {
             const response = await fetch(`http://89.24.77.56:4000/api/products/${id}`, {
-                method: 'PUT', // Or PATCH if your API supports partial updates
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -48,20 +48,19 @@ const EditProduct = () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json(); // Get error details from the response
+                const errorData = await response.json();
                 throw new Error(`HTTP error! Status: ${response.status} - ${errorData.message || 'Unknown error'}`);
             }
 
-            // Handle success, e.g., redirect or show a success message
-            console.log('Product updated successfully!');
+
+            alert('Product updated successfully!');
 
         } catch (error) {
             console.error('Error updating product:', error);
-            // Handle error, e.g., display an error message to the user
         }
     };
 
-    // @ts-ignore
+
     return (
         <div>
             <h2>Edit Product</h2>

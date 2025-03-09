@@ -1,19 +1,26 @@
 "use client";
 import {useRef, useState} from "react";
-import {useRouter} from "next/navigation";
-import Link from "next/link";
 import {register} from "../../actions/register";
-
+import styles from "./ModalStyles.module.css";
+import toast, {Toaster} from 'react-hot-toast';
 
 interface RegisterModalProps {
-    handleShowModal: () => void;
     isOpen: boolean;
+    onClose: () => void;
+    onLoginClick: () => void;
+    className?: string;
 }
 
+const succes = () => toast('Registrace byla úspěšná');
 
-export default function Register({ handleShowModal, isOpen }: RegisterModalProps) {
+export default function RegisterModal({
+                                          isOpen,
+                                          onClose,
+                                          onLoginClick,
+                                          className,
+                                      }: RegisterModalProps) {
     const [error, setError] = useState<string>();
-    const router = useRouter();
+    // const router = useRouter();
     const ref = useRef<HTMLFormElement>(null);
 
     const handleSubmit = async (formData: FormData) => {
@@ -21,15 +28,15 @@ export default function Register({ handleShowModal, isOpen }: RegisterModalProps
             email: formData.get("email"),
             password: formData.get("password"),
             name: formData.get("name"),
-            admin: false
+            admin: false,
         });
         ref.current?.reset();
-        if(r?.error){
+        if (r?.error) {
             setError(r.error);
             return;
         } else {
-            handleShowModal();
-            return router.push("/login");
+            succes();
+            onLoginClick();
         }
     };
 
@@ -37,51 +44,65 @@ export default function Register({ handleShowModal, isOpen }: RegisterModalProps
         return null;
     }
 
-    return(
-        <section className="w-full my-auto  flex items-center justify-center text-black ">
-            <form ref = {ref}
-                  action={handleSubmit}
-                  className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2
-        border border-solid border-black bg-white rounded">
-                {error && <div className="">{error}</div>}
-                <h1 className="mb-5 w-full text-2xl font-bold">Register</h1>
-
-                <label className="w-full text-sm">Full Name</label>
-                <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded text-[13px]"
-                    name="name"
-                />
-
-                <label className="w-full text-sm">Email</label>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-                    name="email"
-                />
-
-                <label className="w-full text-sm">Password</label>
-                <div className="flex w-full">
+    return (
+        <div className={styles.modalOverlay}>
+            <div
+                className={styles.modalContent + (className ? " " + className : "")}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button onClick={onClose} className={styles.closeButton}>
+                    X
+                </button>
+                <h1 className="mb-5 text-2xl font-bold">Registrace</h1>
+                {error && <div className="text-red-500">{error}</div>}
+                <form ref={ref} action={handleSubmit} className="flex flex-col gap-2">
+                    <label className="text-sm">Jméno</label>
+                    <input
+                        type="text"
+                        placeholder="Jméno"
+                        className="w-full h-8 border border-solid border-black rounded p-2 text-sm placeholder-white bg-light"
+                        name="name"
+                    />
+                    <label className="text-sm">Email</label>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        className="w-full h-8 border border-solid border-black rounded p-2 placeholder-white bg-light"
+                        name="email"
+                    />
+                    <label className="text-sm">Heslo</label>
                     <input
                         type="password"
-                        placeholder="Password"
-                        className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
+                        placeholder="Heslo"
+                        className="w-full h-8 border border-solid border-black rounded p-2 placeholder-white bg-light"
                         name="password"
                     />
-                </div>
+                    <button
+                        type="submit"
+                        className="w-full border border-solid border-black rounded bg-primary hover:bg-secondary transition-all mt-2.5 p-1.5"
+                    >
+                        Registrovat se
+                    </button>
+                </form>
+            </div>
 
-                <button className="w-full border border-solid border-black py-1.5 mt-2.5 rounded
-        transition duration-150 ease hover:bg-black">
-                    Sign up
+            <div className={styles.modalContent2}>
+                <h2 className="mb-5 text-xl font-bold text-center">Už máte účet?</h2>
+                <button
+                    onClick={onLoginClick}
+                    className="w-full border border-solid border-black rounded bg-primary hover:bg-secondary transition-all"
+                >
+                    Přihlásit se
                 </button>
+                <button
+                    onClick={succes}
+                    className="w-full border border-solid border-black rounded bg-primary hover:bg-secondary transition-all"
+                >
+                kokot
+                </button>
+                <Toaster />
 
-
-                <Link href="/login" className="text-sm text-[#888] transition duration-150 ease hover:text-black">
-                    Already have an account?
-                </Link>
-            </form>
-        </section>
-    )
+            </div>
+        </div>
+    );
 }

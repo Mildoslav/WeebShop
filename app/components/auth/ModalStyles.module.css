@@ -1,0 +1,31 @@
+.modalOverlay {
+    @apply fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-opacity-75 bg-black z-50;
+}
+
+.modalContent {
+    @apply bg-light rounded-lg shadow-lg p-6 w-full max-w-[400px] relative;
+}
+
+.modalContent2 {
+    @apply bg-light rounded-lg shadow-lg p-6 m-6 w-full max-w-[400px] relative;
+}
+
+.closeButton {
+    @apply absolute top-2 right-2 text-white hover:text-black;
+}
+
+.formContainer {
+    @apply flex flex-col justify-between items-center gap-2;
+}
+
+.error {
+    @apply text-red-500;
+}
+
+.signInButton {
+    @apply w-full border border-solid border-black rounded;
+}
+
+.linkButton {
+    @apply text-sm text-[#888] transition duration-150 ease-in-out hover:text-black;
+}

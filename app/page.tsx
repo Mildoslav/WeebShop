@@ -3,7 +3,7 @@ import ProductList from './components/products/ProductList'
 
 function Page() {
     return (
-        <div>
+        <div className="px-10">
             {/*<div>*/}
             {/*    <ThemeCategory />*/}
             {/*</div>*/}
