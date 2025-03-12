@@ -1,43 +1,36 @@
-"use client"
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'next/navigation';
-import {Product} from '@/utils/types';
+// app/product/[id]/page.tsx
+import {notFound} from 'next/navigation';
+import {Product} from "@/utils/types";
 import Image from "next/image";
+import AddButton from "@/app/components/AddButton";
 
-const EditProduct = () => {
-    const { id } = useParams() as { id: string };
-    const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
+// interface ProductPageProps {
+//     params: { id: string };
+// }
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await fetch(`http://89.24.77.56:4000/api/products/${id}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                setProduct(data);
-            } catch (error) {
-                console.error('Error fetching product:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProduct();
-    }, [id]);
-
-    if (loading) {
-        return <div>Loading...</div>;
+async function getProduct(id: string): Promise<Product | undefined> {
+    try {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL
+        const res = await fetch(`${API_URL}/api/products/${id}`);
+        if (!res.ok) {
+            console.error(`Error fetching product with ID ${id}: ${res.status} ${res.statusText}`);
+            return undefined;
+        }
+        const product: Product = await res.json();
+        return product;
+    } catch (error) {
+        console.error(`Failed to fetch product with ID ${id}:`, error);
+        return undefined;
     }
+}
+
+export default async function ProductPage({ params }: { params: { id: string } }) {
+    const { id } = params;
+    const product = await getProduct(id);
 
     if (!product) {
-        return <div>Product not found.</div>;
+        notFound();
     }
-
-
-
 
     return (
         <div className="max-w-4xl mx-auto p-6">
@@ -57,8 +50,8 @@ const EditProduct = () => {
                 <div className="w-full md:w-1/2">
                     <p className="text-xl mb-4">{product.description}</p>
                     <span className="text-lg font-semibold mb-4 block">
-                        Cena: {product.price} Kč
-                    </span>
+            Cena: {product.price} Kč
+          </span>
                     {product.sizes && product.sizes.length > 0 && (
                         <div>
                             <span className="text-lg font-semibold">Velikosti:</span>
@@ -68,16 +61,18 @@ const EditProduct = () => {
                                         key={index}
                                         className="border border-gray-300 rounded px-2 py-1"
                                     >
-                                        {size}
+                                     {size}
                                     </span>
                                 ))}
                             </div>
                         </div>
                     )}
+                    <div className="mt-3">
+                        <AddButton productId={product.id}/>
+                    </div>
                 </div>
+
             </div>
         </div>
     );
-};
-
-export default EditProduct;
+}
