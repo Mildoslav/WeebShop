@@ -1,16 +1,15 @@
-// app/product/[id]/page.tsx
 import {notFound} from 'next/navigation';
 import {Product} from "@/utils/types";
 import Image from "next/image";
-import AddButton from "@/app/components/AddButton";
+import AddToCartButton from "@/app/components/AddToCartButton";
 
-// interface ProductPageProps {
-//     params: { id: string };
-// }
+interface ProductPageProps {
+    params: { id: string };
+}
 
 async function getProduct(id: string): Promise<Product | undefined> {
     try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
         const res = await fetch(`${API_URL}/api/products/${id}`);
         if (!res.ok) {
             console.error(`Error fetching product with ID ${id}: ${res.status} ${res.statusText}`);
@@ -50,8 +49,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
                 <div className="w-full md:w-1/2">
                     <p className="text-xl mb-4">{product.description}</p>
                     <span className="text-lg font-semibold mb-4 block">
-            Cena: {product.price} Kč
-          </span>
+                        Cena: {product.price} Kč
+                    </span>
                     {product.sizes && product.sizes.length > 0 && (
                         <div>
                             <span className="text-lg font-semibold">Velikosti:</span>
@@ -61,14 +60,14 @@ export default async function ProductPage({ params }: { params: { id: string } }
                                         key={index}
                                         className="border border-gray-300 rounded px-2 py-1"
                                     >
-                                     {size}
+                                        {size}
                                     </span>
                                 ))}
                             </div>
                         </div>
                     )}
                     <div className="mt-3">
-                        <AddButton productId={product.id}/>
+                        <AddToCartButton product={product} /> {/* Předání celého objektu product */}
                     </div>
                 </div>
 

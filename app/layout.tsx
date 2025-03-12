@@ -10,6 +10,7 @@ import AuthModals from "../utils/AuthModals"
 import {getServerSession} from "next-auth";
 import ThemeCategory from "@/app/components/products/ThemeCategory";
 import {CartProvider} from "@/app/contexts/CartContext";
+import {Toaster} from "react-hot-toast";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default async function RootLayout({
                     <Navbar/>
                     <CategoryNavbar/>
                     <ThemeCategory/>
+                    <Toaster />
                     <div className="flex flex-wrap">
                         <aside className="hidden sm:hidden md:hidden lg:block xl:block 2xl:block w-64 min-h-screen">
                             <Sidebar/>

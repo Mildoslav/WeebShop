@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import AddButton from "@/app/components/AddButton";
+import AddToCartButton from "@/app/components/AddToCartButton";
 import {Product} from "@/utils/types";
 import EditButton from "@/app/admin/components/EditButton";
 import DeleteButton from "@/app/admin/components/DeleteButton";
@@ -41,7 +41,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 </Link>
                 <div className="flex justify-center p-3 border-t">
                     <DeleteButton id={String(productId)} />
-                    <AddButton />
+                    <AddToCartButton product={product} /> {/* Predani produktu */}
                     <EditButton id={String(productId)} />
                 </div>
             </div>
