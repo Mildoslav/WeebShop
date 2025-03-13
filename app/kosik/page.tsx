@@ -4,6 +4,7 @@ import React from 'react';
 import {useCart} from '../contexts/CartContext';
 import Image from "next/image";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 function KosikPage() {
     const { cartItems, removeFromCart, updateQuantity, getTotalPrice } = useCart();
@@ -41,17 +42,17 @@ function KosikPage() {
                                 <div className="flex items-center">
                                     <button
                                         onClick={() => handleQuantityChange(item.id, Math.max(1, item.quantity - 1))}
-                                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded-l">-
+                                        className="bg-light hover:bg-pink-950 px-2 py-1 rounded-l">-
                                     </button>
                                     <input
                                         type="number"
                                         value={item.quantity}
                                         onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                                        className="w-12 text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-12 text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                     />
                                     <button
                                         onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded-r">+
+                                        className="bg-light hover:bg-pink-950 px-2 py-1 rounded-r">+
                                     </button>
                                     <button
                                         onClick={() => handleRemoveFromCart(item.id)}
@@ -63,12 +64,14 @@ function KosikPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="md:col-span-1 p-4 bg-gray-100 rounded">
+                    <div className="md:col-span-1 p-4 bg-light rounded">
                         <h3 className="font-bold mb-2">Celkem:</h3>
                         <p className="text-2xl">{totalPrice.toFixed(2)} Kč</p>
-                        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded">
-                            Přejít k objednávce
-                        </button>
+                        <Link href="/objednavka">
+                            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded">
+                                Přejít k objednávce
+                            </button>
+                        </Link>
                     </div>
                 </div>
             ) : (
