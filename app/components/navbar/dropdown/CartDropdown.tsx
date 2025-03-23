@@ -14,7 +14,7 @@ function CartDropdown() {
         <div onClick={() => setOpen(!open)} className="relative cursor-pointer">
             <div className="flex items-center">
                 <IoCartOutline size={28} />
-                <div className="pl-1 hidden sm:block">Kč {totalPrice.toFixed(2)}</div>
+                <div className="pl-1 block">Kč {totalPrice.toFixed(2)}</div>
             </div>
             <ul className={`${open ? "block" : "hidden"} absolute right-0 bg-white text-black p-2 mt-2 rounded-lg shadow-xl z-10 min-w-[200px]`}>
                 {cartItems.length > 0 ? (

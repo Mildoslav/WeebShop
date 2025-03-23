@@ -13,7 +13,8 @@ export default withUt({
        primary: "#382039",
         secondary: "#200f21",
         light: "#5a3d5c",
-        button1: "#f638dc"
+        button1: "#5c0d51",
+          button2: "#871f78"
       },
     },
   },

@@ -23,8 +23,8 @@ export default async function ProductList() {
 
     return (
         <Suspense fallback={<div>Loading products...</div>}>
-            <main className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 lg:px-10 ">
-                {products.map((product : Product) => (
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                {products.map((product: Product) => (
                     <ProductCard key={product._id.toString()} product={{...product, _id: (product._id)}}/>
                 ))}
             </main>

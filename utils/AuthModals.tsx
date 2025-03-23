@@ -3,19 +3,19 @@ import LoginModal from "@/app/components/auth/LoginModal";
 import RegisterModal from "@/app/components/auth/RegisterModal";
 
 interface AuthModalsProps {
-    isLoginModalOpen: boolean;
-    isRegisterModalOpen: boolean;
-    openLoginModal: () => void;
-    openRegisterModal: () => void;
-    closeModals: () => void;
+    isLoginModalOpen?: boolean; // Optional
+    isRegisterModalOpen?: boolean; // Optional
+    openLoginModal?: () => void; // Optional
+    openRegisterModal?: () => void; // Optional
+    closeModals?: () => void; // Optional
 }
 
 export default function AuthModals({
-                                       isLoginModalOpen,
-                                       isRegisterModalOpen,
-                                       openLoginModal,
-                                       openRegisterModal,
-                                       closeModals,
+                                       isLoginModalOpen = false,
+                                       isRegisterModalOpen = false,
+                                       openLoginModal = () => {},
+                                       openRegisterModal = () => {},
+                                       closeModals = () => {},
                                    }: AuthModalsProps) {
 
     return (

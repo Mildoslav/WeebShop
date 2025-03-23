@@ -67,7 +67,7 @@ function KosikPage() {
                     <div className="md:col-span-1 p-4 bg-light rounded">
                         <h3 className="font-bold mb-2">Celkem:</h3>
                         <p className="text-2xl">{totalPrice.toFixed(2)} Kč</p>
-                        <Link href="/objednavka">
+                        <Link href="/shipment">
                             <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded">
                                 Přejít k objednávce
                             </button>

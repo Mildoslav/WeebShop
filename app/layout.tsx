@@ -4,13 +4,12 @@ import "./globals.css";
 import Navbar from "@/app/components/navbar/Navbar";
 import {Provider} from "./provider";
 import CategoryNavbar from "@/app/components/navbar/CategoryNavbar";
-import Sidebar from "@/app/components/sidebar/Sidebar";
 import React from "react";
 import AuthModals from "../utils/AuthModals"
 import {getServerSession} from "next-auth";
-import ThemeCategory from "@/app/components/products/ThemeCategory";
 import {CartProvider} from "@/app/contexts/CartContext";
 import {Toaster} from "react-hot-toast";
+import Footer from "@/app/components/Footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -42,16 +41,13 @@ export default async function RootLayout({
                 <div className="min-h-screen">
                     <Navbar/>
                     <CategoryNavbar/>
-                    <ThemeCategory/>
                     <Toaster />
                     <div className="flex flex-wrap">
-                        <aside className="hidden sm:hidden md:hidden lg:block xl:block 2xl:block w-64 min-h-screen">
-                            <Sidebar/>
-                        </aside>
                         <main className="flex-1 p-4">
                             <AuthModals/>
                             {children}
                         </main>
+                        <Footer />
                     </div>
                 </div>
             </CartProvider>

@@ -1,9 +1,8 @@
-// app/components/AddToCartButton.tsx
 "use client";
 
 import {useCart} from "../contexts/CartContext";
 import {Product} from "@/utils/types";
-import toast from 'react-hot-toast'; // Importujeme toast
+import toast from 'react-hot-toast';
 
 interface AddToCartButtonProps {
     product: Product;
@@ -21,14 +20,14 @@ function AddToCartButton({ product }: AddToCartButtonProps) {
         });
         toast.success(`${product.name} byl přidán do košíku!`, {
             duration: 3000,
-            position: 'top-right',
-        }); // Zobrazíme toast zprávu
+            position: 'bottom-center',
+        });
     };
 
     return (
         <button
             onClick={handleClick}
-            className="bg-light hover:bg-button1 text-white font-bold py-1 px-2 mb-2 rounded"
+            className="bg-light hover:bg-button1 text-white font-bold py-2 px-4 mb-2 rounded w-full sm:w-auto"
         >
             Přidat do košíku
         </button>
