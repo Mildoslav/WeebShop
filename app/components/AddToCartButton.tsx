@@ -27,7 +27,7 @@ function AddToCartButton({ product }: AddToCartButtonProps) {
     return (
         <button
             onClick={handleClick}
-            className="bg-light hover:bg-button1 text-white font-bold py-2 px-4 mb-2 rounded w-full sm:w-auto"
+            className="bg-light hover:bg-button1 text-white font-bold p-3 rounded-xl w-full sm:w-auto"
         >
             Přidat do košíku
         </button>
