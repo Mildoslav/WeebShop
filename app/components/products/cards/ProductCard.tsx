@@ -3,8 +3,6 @@ import React from "react";
 import Image from "next/image";
 import AddToCartButton from "@/app/components/AddToCartButton";
 import {Product} from "@/utils/types";
-import EditButton from "@/app/admin/components/EditButton";
-import DeleteButton from "@/app/admin/components/DeleteButton";
 import Link from "next/link";
 import {AnimatePresence, motion} from "framer-motion";
 
@@ -48,9 +46,7 @@ const ProductCard: React.FC<Props> = ({product}) => {
                         </div>
                     </Link>
                     <div className="flex flex-col items-center justify-center p-3 border-t m-1">
-                        <DeleteButton id={String(productId)}/>
                         <AddToCartButton product={product}/>
-                        <EditButton id={String(productId)}/>
                     </div>
                 </div>
             </motion.div>

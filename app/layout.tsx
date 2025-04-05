@@ -9,7 +9,7 @@ import AuthModals from "../utils/AuthModals"
 import {getServerSession} from "next-auth";
 import {CartProvider} from "@/app/contexts/CartContext";
 import {Toaster} from "react-hot-toast";
-import Footer from "@/app/components/Footer";
+import Footer from "@/app/components/footer/Footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
