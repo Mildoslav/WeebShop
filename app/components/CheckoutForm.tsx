@@ -2,6 +2,7 @@
 
 import {FormEvent, useState} from 'react';
 import {PaymentElement, useElements, useStripe,} from '@stripe/react-stripe-js';
+import {redirect, RedirectType} from "next/navigation";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
@@ -17,13 +18,34 @@ export default function CheckoutForm() {
 
         if (!stripe || !elements) {
             console.log("Stripe.js hasn't loaded yet.");
-            setErrorMessage("Payment system is not ready. Please wait a moment and try again.");
+            // User-facing message translated
+            setErrorMessage("Platební systém není připraven. Počkejte prosím okamžik a zkuste to znovu.");
             setIsLoading(false);
             return;
         }
 
+        const apiResult = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order/shipment`, {
+            cache: 'no-store',
+            method: "POST",
+            body: JSON.stringify({
+                paymentMethod: "stripe"
+            })
+        });
 
-        const { error } = await stripe.confirmPayment({
+        if (!apiResult.ok) {
+            console.error("Error creating payment intent:", apiResult.statusText);
+            // User-facing message translated
+            setErrorMessage("Objednávka nebyla vytvořena, zkuste to prosím znovu.");
+            setIsLoading(false);
+
+            // Redirect to card page in 3 seconds
+            setTimeout(() => {
+                redirect("/kosik", RedirectType.push);
+            }, 2000);
+            return;
+        }
+
+        const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: `${window.location.origin}/payment-result`,
@@ -32,7 +54,8 @@ export default function CheckoutForm() {
 
         if (error) {
             console.error("Stripe confirmation error:", error);
-            setErrorMessage(error.message || "An unexpected error occurred.");
+            // User-facing fallback message translated
+            setErrorMessage(error.message || "Došlo k neočekávané chybě.");
             setIsLoading(false);
         } else {
             console.log("Payment initiated, waiting for redirection or confirmation...");
@@ -41,14 +64,16 @@ export default function CheckoutForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Payment Details</h2>
-            <PaymentElement id="payment-element" />
+            {/* User-facing heading translated */}
+            <h2>Platební údaje</h2>
+            <PaymentElement id="payment-element"/>
 
-            <button type="submit" disabled={!stripe || isLoading} style={{ marginTop: '20px' }}>
-                {isLoading ? 'Processing...' : 'Pay Now'}
+            <button type="submit" disabled={!stripe || isLoading} style={{marginTop: '20px'}}>
+                {/* User-facing button texts translated */}
+                {isLoading ? 'Zpracovává se...' : 'Zaplatit nyní'}
             </button>
 
-            {errorMessage && <div style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</div>}
+            {errorMessage && <div style={{color: 'red', marginTop: '10px'}}>{errorMessage}</div>}
         </form>
     );
 }

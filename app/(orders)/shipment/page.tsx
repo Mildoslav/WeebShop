@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from "next/link";
+import {redirect, RedirectType} from "next/navigation";
 
 const ShipmentPage: React.FC = () => {
 
@@ -12,6 +13,9 @@ const ShipmentPage: React.FC = () => {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
         // Handle form submission logic here
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order/shipment`, {
             cache: 'no-store',
@@ -20,10 +24,16 @@ const ShipmentPage: React.FC = () => {
                 fullName: fullName,
                 address: address,
                 city: city,
-                postalCode: postalCode
+                postalCode: postalCode,
+                cartItems: cart,
+                price: cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0)
             })
         });
-
+        if (res.ok) {
+            redirect("/checkout", RedirectType.push);
+        } else {
+            // todo: handle error
+        }
     }
 
     return (

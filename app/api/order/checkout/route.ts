@@ -12,23 +12,19 @@ export async function POST(req: Request): Promise<Response> {
         const data = await req.json();
 
         const session = await getServerSession(authOptions);
+        const order = cookieStore.get('order');
 
-        const order = await Order.create({
-            orderState: "shipment",
-            user: session?._id,
-            fullName: data.fullName,
-            address: data.address,
-            city: data.city,
-            postalCode: data.postalCode,
-            cartItems: data.cartItems,
-            price: data.price,
-        });
-
-        // save order to cookie
-        cookieStore.set('order', order._id);
+        await Order.updateOne(
+            {_id: order.value},
+            {
+                orderState: "payment",
+                paymentMethod: data.paymentMethod,
+                orderDate: new Date(),
+            }
+        );
 
         return Response.json(
-            {message: 'Order created successfully', order},
+            {message: 'Order updated successfully'},
             {status: 200}
         );
     } catch (error) {

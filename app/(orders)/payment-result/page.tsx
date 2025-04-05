@@ -23,6 +23,8 @@ function PaymentResultContent() {
             return;
         }
 
+        // todo: add api for updating order and make sure id is matched with order
+
         const clientSecret = searchParams.get('payment_intent_client_secret');
         const redirectStatus = searchParams.get('redirect_status');
 
