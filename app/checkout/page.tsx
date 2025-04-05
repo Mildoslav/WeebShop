@@ -12,6 +12,7 @@ export default function CheckoutPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    // Replace with actual order amount from cart
     const orderAmount = 123.45;
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export default function CheckoutPage() {
         })
             .then((res) => {
                 if (!res.ok) {
-                    return res.json().then(err => {throw new Error(err.error || 'Failed to create Payment Intent')});
+                    return res.json().then(err => { throw new Error(err.error || 'Failed to create Payment Intent') });
                 }
                 return res.json();
             })
@@ -48,23 +49,35 @@ export default function CheckoutPage() {
     };
 
     if (loading) {
-        return <div>Loading payment details...</div>;
+        return <div className="flex justify-center items-center ">Loading payment details...</div>;
     }
 
     if (error) {
-        return <div>Error: {error} <button onClick={() => window.location.reload()}>Try again</button></div>;
+        return (
+            <div className="flex flex-col items-center justify-center ">
+                <div className="text-red-500 mb-4">Error: {error}</div>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => window.location.reload()}>Try again</button>
+            </div>
+        );
     }
 
     if (!clientSecret) {
-        return <div>Could not load payment form. <button onClick={() => window.location.reload()}>Try again</button></div>;
+        return (
+            <div className="flex flex-col items-center justify-center ">
+                <div className="text-red-500 mb-4">Could not load payment form.</div>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => window.location.reload()}>Try again</button>
+            </div>
+        );
     }
 
     return (
-        <div>
-            <h1>Checkout</h1>
-            <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm />
-            </Elements>
+        <div className="flex flex-col items-center justify-center bg-secondary p-4">
+            <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+            <div className="w-full max-w-md bg-primary p-6 rounded-lg shadow-md">
+                <Elements stripe={stripePromise} options={options}>
+                    <CheckoutForm />
+                </Elements>
+            </div>
         </div>
     );
 }
