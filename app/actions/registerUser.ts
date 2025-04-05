@@ -1,9 +1,9 @@
 "use server"
-import { connectDB } from "../../lib/mongodb";
+import {connectDB} from "../../lib/mongodb";
 import User from "@/lib/models/User";
 import bcrypt from "bcryptjs";
 
-export const register = async (values: any) => {
+export const registerUser = async (values: any) => {
     const { email, password, name } = values;
 
     try {

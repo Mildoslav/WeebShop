@@ -17,12 +17,14 @@ export default function CheckoutPage() {
     useEffect(() => {
         fetch('/api/create-payment-intent', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: orderAmount }),
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({amount: orderAmount}),
         })
             .then((res) => {
                 if (!res.ok) {
-                    return res.json().then(err => {throw new Error(err.error || 'Failed to create Payment Intent')});
+                    return res.json().then(err => {
+                        throw new Error(err.error || 'Failed to create Payment Intent')
+                    });
                 }
                 return res.json();
             })
@@ -52,18 +54,21 @@ export default function CheckoutPage() {
     }
 
     if (error) {
-        return <div>Error: {error} <button onClick={() => window.location.reload()}>Try again</button></div>;
+        return <div>Error: {error}
+            <button onClick={() => window.location.reload()}>Try again</button>
+        </div>;
     }
 
     if (!clientSecret) {
-        return <div>Could not load payment form. <button onClick={() => window.location.reload()}>Try again</button></div>;
+        return <div>Could not load payment form. <button onClick={() => window.location.reload()}>Try again</button>
+        </div>;
     }
 
     return (
         <div>
             <h1>Checkout</h1>
             <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm />
+                <CheckoutForm/>
             </Elements>
         </div>
     );
