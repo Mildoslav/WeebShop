@@ -1,9 +1,6 @@
+// app/api/create-payment-intent/route.ts
 import {NextResponse} from 'next/server';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    typescript: true,
-});
+import {stripe} from '@/lib/stripe';
 
 export async function POST(request: Request) {
     try {
@@ -14,7 +11,7 @@ export async function POST(request: Request) {
         }
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: Math.round(amount * 100),
+            amount: Math.round(amount * 100), // Convert to cents
             currency: currency,
             automatic_payment_methods: {
                 enabled: true,
@@ -22,13 +19,10 @@ export async function POST(request: Request) {
         });
 
         return NextResponse.json({ clientSecret: paymentIntent.client_secret });
-
     } catch (error) {
         console.error("Error creating Payment Intent:", error);
         let errorMessage = 'Internal Server Error';
-        if (error instanceof Stripe.errors.StripeError) {
-            errorMessage = error.message;
-        } else if (error instanceof Error) {
+        if (error instanceof Error) {
             errorMessage = error.message;
         }
         return NextResponse.json({ error: errorMessage }, { status: 500 });
