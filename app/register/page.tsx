@@ -2,8 +2,7 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
-import {register} from "../actions/register";
-
+import {registerUser} from "../actions/registerUser";
 
 export default function Register() {
     const [error, setError] = useState<string>();
@@ -11,24 +10,24 @@ export default function Register() {
     const ref = useRef<HTMLFormElement>(null);
 
     const handleSubmit = async (formData: FormData) => {
-        const r = await register({
+        const result = await registerUser({
             email: formData.get("email"),
             password: formData.get("password"),
             name: formData.get("name"),
             admin: false
         });
         ref.current?.reset();
-        if(r?.error){
-            setError(r.error);
+        if (result?.error) {
+            setError(result.error);
             return;
         } else {
             return router.push("/login");
         }
     };
 
-    return(
+    return (
         <section className="w-full my-auto  flex items-center justify-center text-black ">
-            <form ref = {ref}
+            <form ref={ref}
                   action={handleSubmit}
                   className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2
         border border-solid border-black bg-white rounded">
@@ -62,10 +61,9 @@ export default function Register() {
                 </div>
 
                 <button className="w-full border border-solid border-black py-1.5 mt-2.5 rounded
-        transition duration-150 ease hover:bg-black">
+                                   transition duration-150 ease hover:bg-black">
                     Sign up
                 </button>
-
 
                 <Link href="/login" className="text-sm text-[#888] transition duration-150 ease hover:text-black">
                     Already have an account?

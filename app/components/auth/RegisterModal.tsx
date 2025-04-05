@@ -1,6 +1,6 @@
 "use client";
 import {useRef, useState} from "react";
-import {register} from "../../actions/register";
+import {registerUser} from "../../actions/registerUser";
 import styles from "./ModalStyles.module.css";
 import toast, {Toaster} from 'react-hot-toast';
 
@@ -24,7 +24,7 @@ export default function RegisterModal({
     const ref = useRef<HTMLFormElement>(null);
 
     const handleSubmit = async (formData: FormData) => {
-        const r = await register({
+        const r = await registerUser({
             email: formData.get("email"),
             password: formData.get("password"),
             name: formData.get("name"),

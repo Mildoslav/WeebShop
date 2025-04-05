@@ -32,7 +32,7 @@ function PaymentResultContent() {
             return;
         }
 
-        stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+        stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
             switch (paymentIntent?.status) {
                 case 'succeeded':
                     setMessage('Payment successful!');
@@ -77,7 +77,7 @@ function PaymentResultContent() {
 export default function PaymentResultPage() {
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <PaymentResultContent />
+            <PaymentResultContent/>
         </Suspense>
     );
 }
