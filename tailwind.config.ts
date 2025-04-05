@@ -11,7 +11,7 @@ export default withUt({
     extend: {
       colors: {
        primary: "#382039",
-        secondary: "#200f21",
+        secondary: "#301135",
         light: "#5a3d5c",
         button1: "#5c0d51",
           button2: "#871f78"

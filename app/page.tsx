@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductList from './components/products/ProductList';
 import ImageSlider from "@/app/components/products/ImageSlider";
-import Sidebar from "@/app/components/sidebar/Sidebar";
 
 function Page() {
     return (
@@ -11,9 +10,6 @@ function Page() {
                     <ImageSlider />
                 </div>
                 <div className="flex justify-center">
-                    <aside className="hidden lg:block w-64 min-h-screen">
-                        <Sidebar />
-                    </aside>
                     <ProductList />
                 </div>
             </main>

@@ -18,6 +18,7 @@ body {
   background-color: #382039;
   color: white;
   display: flex;
+  font-family: Arial, sans-serif;
   flex-direction: column;
   min-height: 100vh;
 }
