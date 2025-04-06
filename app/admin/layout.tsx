@@ -10,7 +10,9 @@ interface AdminLayoutProps {
 function AdminLayout({ children }: AdminLayoutProps) {
     return (
         <div className="flex min-h-screen">
-            <AdminSidebar />
+            <>
+                <AdminSidebar/>
+            </>
             <main className="flex-1 p-4">
                 <AdminNavbar />
                 {children}
