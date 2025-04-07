@@ -36,14 +36,28 @@ export default function UserAuth() {
                     <button>
                         <FaUserCircle size={22} />
                     </button>
-                    <div className={`${open ? "block" : "hidden"} absolute bg-amber-50 text-black px-2 py-2 mt-2 rounded-lg shadow-xl -translate-x-[50%] z-50`}>
+                    <div
+                        className={`${open ? "block" : "hidden"} absolute bg-amber-50 text-black mt-2 rounded-lg shadow-xl -translate-x-[50%] z-50`}>
                         <ul>
-                            <Link href="/"><li className="text-center">Nastavení účtu</li></Link>
-                            <Link href="/"><li className="text-center">Historie objednávek</li></Link>
-                            <Link href="/"><li className="text-center">Vrácení zboží</li></Link>
-                            <Link href="/"><li className="text-center">Hodnocení</li></Link>
+                            <Link href="/">
+                                <li className="text-center px-2 py-1 hover:bg-gray-600 hover:text-white">Nastavení
+                                    účtu
+                                </li>
+                            </Link>
+                            <Link href="/">
+                                <li className="text-center px-2 py-1 hover:bg-gray-600 hover:text-white">Historie
+                                    objednávek
+                                </li>
+                            </Link>
+                            <Link href="/">
+                                <li className="text-center px-2 py-1 hover:bg-gray-600 hover:text-white">Vrácení zboží
+                                </li>
+                            </Link>
+                            <Link href="/">
+                                <li className="text-center px-2 py-1 hover:bg-gray-600 hover:text-white">Hodnocení</li>
+                            </Link>
                             <button
-                                className="border border-solid border-black rounded"
+                                className="text-center px-2 py-1 hover:bg-gray-600 w-full hover:text-white"
                                 onClick={() => signOut({ redirect: false }).then(() => router.push("/"))}
                             >
                                 Sign Out

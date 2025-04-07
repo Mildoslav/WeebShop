@@ -4,14 +4,14 @@ import type {NextAuthOptions} from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
-export const authOptions: NextAuthOptions  = {
+export const authOptions: NextAuthOptions = {
     providers: [
         credentials({
             name: "Credentials",
             id: "credentials",
             credentials: {
-                email: { label: "Email", type: "text" },
-                password: { label: "Password", type: "password" },
+                email: {label: "Email", type: "text"},
+                password: {label: "Password", type: "password"},
             },
             async authorize(credentials) {
                 await connectDB();
@@ -41,11 +41,10 @@ export const authOptions: NextAuthOptions  = {
             const data = await User.findOne({
                 email
             }).exec()
-            if(data.admin){
-                // @ts-ignore
+
+            if (data.admin) {
                 session.admin = true;
             }
-            console.log(data);
 
             return session;
         }

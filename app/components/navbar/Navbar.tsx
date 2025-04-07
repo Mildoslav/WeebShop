@@ -18,15 +18,15 @@ function Navbar() {
     const totalPrice = getTotalPrice() || 0;
 
     return (
-        <nav className="flex flex-col md:flex-row justify-between items-center px-6 bg-secondary">
+        <nav className="flex flex-col md:flex-row justify-between items-center px-6 bg-secondary pb-2">
             {/*left*/}
             <div className="flex sm:justify-center justify-between w-full md:w-auto">
                 <div className="md:hidden px-4 bg-button1 rounded-xl items-center flex">
                     <GiHamburgerMenu size={22} />
                 </div>
-                <div className="flex items-center border rounded-xl overflow-hidden w-full max-w-xs md:max-w-md">
+                <div className="flex items-center rounded-xl overflow-hidden w-full max-w-xs md:max-w-md">
                     <input type="text" placeholder="Search..."
-                           className="py-0.5 px-2 h-fit outline-none flex-1"/>
+                           className="py-1 px-2 h-fit outline-none flex-1"/>
                     <button className="p-2 bg-button1 hover:bg-gray-300">
                         <FaSearch/>
                     </button>
@@ -35,7 +35,7 @@ function Navbar() {
 
             {/*middle*/}
             <div className="flex justify-between items-center w-full md:w-auto mb-2 md:mb-0">
-                <div className="flex items-center">
+                <div className="flex items-center hover:scale-105 transition">
                     <Link href="/">
                         <Image
                             src={Logo}

@@ -24,33 +24,39 @@ function CategoryNavbar() {
     const cartItemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
     return (
-        <div className={`flex justify-center align-middle p-2 px-12 gap-3 bg-light ${isScrolled ? 'fixed top-0 left-0 w-full shadow-md z-50' : ''}`}>
+        <div
+            className={`flex justify-center align-middle py-3 px-12 gap-6 flex-wrap bg-light ${isScrolled ? 'fixed top-0 left-0 w-full shadow-md z-50' : ''}`}>
             <div>
-                <Link href={"/"}>
+                <Link href={"/"}
+                      className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>
                     Akce
                 </Link>
             </div>
 
             <div>
-                <Link href={"/"}>
+                <Link href={"/"}
+                      className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>
                     Výprodej
                 </Link>
             </div>
 
             <div>
-                <Link href={"/"}>
+                <Link href={"/"}
+                      className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>
                     Kategorie
                 </Link>
             </div>
 
             <div>
-                <Link href={"/"}>
+                <Link href={"/"}
+                      className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>
                     Anime
                 </Link>
             </div>
 
             <div>
-                <Link href={"/"}>
+                <Link href={"/"}
+                      className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>
                     Bižuterie
                 </Link>
             </div>

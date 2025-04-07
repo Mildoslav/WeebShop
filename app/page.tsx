@@ -9,8 +9,14 @@ function Page() {
                 <div className="justify-center flex">
                     <ImageSlider />
                 </div>
+                <h1 className="text-3xl font-bold text-center mt-4">Všechny produkty</h1>
                 <div className="flex justify-center">
                     <ProductList />
+                </div>
+                <div className="flex justify-center mt-4 rounded-lg">
+                    <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                        Načíst další
+                    </button>
                 </div>
             </main>
         </div>
