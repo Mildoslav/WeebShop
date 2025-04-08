@@ -33,7 +33,7 @@ export default function UserAuth() {
         if (status === "authenticated") {
             return (
                 <div onClick={() => setOpen(!open)}>
-                    <button>
+                    <button className="flex">
                         <FaUserCircle size={22} />
                     </button>
                     <div
