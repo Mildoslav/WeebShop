@@ -24,10 +24,10 @@ function Navbar() {
                 <div className="md:hidden px-4 bg-button1 rounded-xl items-center flex">
                     <GiHamburgerMenu size={22} />
                 </div>
-                <div className="flex items-center rounded-xl overflow-hidden w-full max-w-xs md:max-w-md">
+                <div className="flex items-center rounded-xl overflow-hidden w-full max-w-xs md:max-w-md text-black">
                     <input type="text" placeholder="Search..."
                            className="py-1 px-2 h-fit outline-none flex-1"/>
-                    <button className="p-2 bg-button1 hover:bg-gray-300">
+                    <button className="p-2 bg-button1 hover:bg-button2">
                         <FaSearch/>
                     </button>
                 </div>

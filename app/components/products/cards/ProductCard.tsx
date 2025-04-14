@@ -40,7 +40,7 @@ const ProductCard: React.FC<Props> = ({product}) => {
                         </div>
                     </Link>
                     <Link href={`/product/${productId}`}>
-                        <div className="flex flex-col gap-2 p-3">
+                        <div className="flex flex-col gap-2 p-3 text-center">
                             <h1 className="truncate text-2xl">{product.name}</h1>
                             <h2 className="text-lg">{product.price} Kč</h2>
                         </div>

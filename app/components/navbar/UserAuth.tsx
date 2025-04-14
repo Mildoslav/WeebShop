@@ -34,7 +34,7 @@ export default function UserAuth() {
             return (
                 <div onClick={() => setOpen(!open)}>
                     <button className="flex">
-                        <FaUserCircle size={22} />
+                        <FaUserCircle size={30} />
                     </button>
                     <div
                         className={`${open ? "block" : "hidden"} absolute bg-amber-50 text-black mt-2 rounded-lg shadow-xl -translate-x-[50%] z-50`}>
@@ -60,7 +60,7 @@ export default function UserAuth() {
                                 className="text-center px-2 py-1 hover:bg-gray-600 w-full hover:text-white"
                                 onClick={() => signOut({ redirect: false }).then(() => router.push("/"))}
                             >
-                                Sign Out
+                                Odhlasit se
                             </button>
                         </ul>
                     </div>

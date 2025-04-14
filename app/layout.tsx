@@ -43,7 +43,7 @@ export default async function RootLayout({
                     <CategoryNavbar/>
                     <Toaster />
                     <div className="flex flex-wrap">
-                        <main className="flex-1 p-4">
+                        <main className="flex-1">
                             <AuthModals/>
                             {children}
                         </main>

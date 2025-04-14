@@ -16,6 +16,14 @@ export default withUt({
         button1: "#5c0d51",
           button2: "#871f78"
       },
+        screens: {
+            xs: "480px",
+            ss: "620px",
+            sm: "768px",
+            md: "1060px",
+            lg: "1200px",
+            xl: "1700px",
+        },
     },
   },
   plugins: [],
