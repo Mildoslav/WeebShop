@@ -8,7 +8,8 @@ interface ProductData {
     price?: number;
     sizes?: string[];
     image?: string;
-    // ... other product properties as needed
+    moreImages?: string[];
+
 }
 
 interface ProductFormProps {
@@ -43,9 +44,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialValues, onSubmit, form
         onSubmit(productData);
     };
 
-  const handleUploadComplete = (res: { url: string }[]) => {
+    const handleUploadComplete = (res: { url: string }[], isMainImage: boolean = true) => {
         if (res && res[0] && res[0].url) {
-            setProductData(prevData => ({ ...prevData, image: res[0].url.trim() }));
+            if (isMainImage) {
+                setProductData(prevData => ({ ...prevData, image: res[0].url.trim() }));
+            } else {
+                setProductData(prevData => ({
+                    ...prevData,
+                    moreImages: [...(prevData.moreImages || []), res[0].url.trim()],
+                }));
+            }
         } else {
             console.error("Upload complete but URL is missing:", res);
         }

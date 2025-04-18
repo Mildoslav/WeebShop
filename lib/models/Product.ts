@@ -27,8 +27,12 @@ const ProductSchema = new Schema<ProductDocument>({
         },
         image: {
             type: String,
+            required: true,
+        },
+        moreImages: {
+            type: [String],
             required: false,
-        }
+        },
     },
     {
         timestamps: true,

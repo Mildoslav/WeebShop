@@ -20,7 +20,7 @@ const Banner: React.FC<BannerProps> = ({
                                            buttonLink,
                                        }) => {
     return (
-        <section className="relative w-full h-64 md:h-80 lg:h-96"> {/* Výška banneru, responzivní */}
+        <section className="relative w-full h-64 md:h-80 lg:h-96">
             {/* Kontejner pro Image */}
             <div className="absolute inset-0">
                 <Image

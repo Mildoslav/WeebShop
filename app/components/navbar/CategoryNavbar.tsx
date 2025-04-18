@@ -25,7 +25,7 @@ function CategoryNavbar() {
 
     return (
         <div
-            className={`flex justify-center align-middle py-3 px-12 gap-6 flex-wrap bg-light ${isScrolled ? 'fixed top-0 left-0 w-full shadow-md z-50' : ''}`}>
+            className={`flex justify-center align-middle py-6 px-12 gap-6 flex-wrap bg-light ${isScrolled ? 'fixed top-0 left-0 w-full shadow-md z-50' : ''}`}>
             <div>
                 <Link href={"/"}
                       className={"p-2 rounded-lg border-2 border-purple-400 font-bold hover:border-purple-500"}>

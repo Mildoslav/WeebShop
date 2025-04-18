@@ -18,7 +18,6 @@ export default function CheckoutForm() {
 
         if (!stripe || !elements) {
             console.log("Stripe.js hasn't loaded yet.");
-            // User-facing message translated
             setErrorMessage("Platební systém není připraven. Počkejte prosím okamžik a zkuste to znovu.");
             setIsLoading(false);
             return;

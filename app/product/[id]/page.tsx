@@ -1,5 +1,5 @@
-import {notFound} from 'next/navigation';
-import {Product} from "@/utils/types";
+import { notFound } from 'next/navigation';
+import { Product } from "@/utils/types";
 import Image from "next/image";
 import AddToCartButton from "@/app/components/AddToCartButton";
 
@@ -24,7 +24,7 @@ async function getProduct(id: string): Promise<Product | undefined> {
 }
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-    const { id } = await params;
+    const { id } = params;
     const product = await getProduct(id);
 
     if (!product) {
@@ -44,6 +44,22 @@ export default async function ProductPage({ params }: { params: { id: string } }
                             height={500}
                             className="rounded-md"
                         />
+                    )}
+                </div>
+                <div className="w-full md:w-1/2">
+                    {product.moreImages && product.moreImages.length > 0 && (
+                        <div className="grid grid-cols-2 gap-4">
+                            {product.moreImages.map((image, index) => (
+                                <Image
+                                    key={index}
+                                    src={image}
+                                    alt={`${product.name} - obrázek ${index + 1}`}
+                                    width={250}
+                                    height={250}
+                                    className="rounded-md"
+                                />
+                            ))}
+                        </div>
                     )}
                 </div>
                 <div className="w-full md:w-1/2">
@@ -67,10 +83,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         </div>
                     )}
                     <div className="mt-3">
-                        <AddToCartButton product={product} /> {/* Předání celého objektu product */}
+                        <AddToCartButton product={product} />
                     </div>
                 </div>
-
             </div>
         </div>
     );

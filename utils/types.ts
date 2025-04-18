@@ -5,6 +5,7 @@ export interface Product {
     sizes: string[]
     price: number;
     image: string;
+    moreImages: string[];
 }
 
 export interface Theme {

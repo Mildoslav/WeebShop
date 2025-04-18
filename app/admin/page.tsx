@@ -1,31 +1,39 @@
-// app/admin/page.tsx
-import {redirect} from 'next/navigation';
-import {getServerSession} from 'next-auth/next';
-import {authOptions} from '@/app/api/auth/[...nextauth]/route';
-import {connectDB} from '../../lib/mongodb';
-import User from '@/lib/models/User';
+import React from 'react';
+import {Product} from "@/utils/types";
+import ProductCard from "@/app/components/products/cards/ProductCard";
+import Link from "next/link";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {isAdmin} from "@/utils/isAdmin";
 
-async function getUser(email: string) {
-    await connectDB();
-    return User.findOne({ email });
+async function getProducts(): Promise<Product[]> {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${API_URL}/api/products`);
+    const products: Product[] = await res.json();
+    return products;
 }
 
-export default async function AdminPage() {
+async function ProductsPage() {
+    const products = await getProducts();
     const session = await getServerSession(authOptions);
-
-    if (!session) {
-        redirect('/login');
-    }
-
-    const user = await getUser(session.user?.email as string);
-
-    if (!user || !user.admin) {
-        redirect('/');
-    }
+    const isAdminUser = await isAdmin(session?.user);
 
     return (
-        <div className="p-4"> {/* Removed AdminLayout */}
-            <h1 className="text-3xl font-bold">Orders</h1>
+        <div className="p-4">
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold">Products</h1>
+                <Link href="/admin/products/new"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    New Product
+                </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+                {products.map((product) => (
+                    <ProductCard key={product._id} product={product} isAdmin={isAdminUser}/>
+                ))}
+            </div>
         </div>
     );
 }
+
+export default ProductsPage;
